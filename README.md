@@ -21,6 +21,9 @@ Create a new Baserow Table with the following Fields
     - Yes
     - No
 
+It will look something like this:
+<img width="767" alt="image" src="https://user-images.githubusercontent.com/640846/179925701-720254a0-9380-4958-a660-099b33babe79.png">
+
 View the automatically generated API docs and make a note of the values for Restarted and Type, These will be numbers. Also make a note of your Table URL and your API Token.
 
 ### Lowdefy
