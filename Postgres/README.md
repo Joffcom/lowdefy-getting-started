@@ -23,7 +23,7 @@ Copy `example.env` as `.env` and update the values to match your environment\
 `LOWDEFY_SECRET_PG_PORT` - The port for your database\
 `LOWDEFY_SECRET_PG_DB` - The name of your database\
 `LOWDEFY_SECRET_PG_USER` - Your postgres username\
-`LOWDEFY_SECRET_PG_PASS` - Your postgres password\
+`LOWDEFY_SECRET_PG_PASS` - Your postgres password
 
 ### Checklist
 - [ ] - Postgres Database created
