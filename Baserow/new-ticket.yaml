@@ -106,3 +106,5 @@ blocks:
             - id: post_data
               type: Request
               params: post_data
+            - id: reset
+              type: Reset

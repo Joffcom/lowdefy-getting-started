@@ -1,0 +1,104 @@
+id: new-ticket
+type: PageHeaderMenu
+properties:
+  title: New Ticket
+layout:
+  contentJustify: center
+requests:
+  - id: post_data
+    type: KnexBuilder
+    connectionId: postgres
+    properties:
+      tableName: tickets
+      query:
+        - insert:
+          - title:
+              _state: ticket_title
+            description:
+              _state: ticket_description
+            ticket_type:
+              _state: ticket_type
+            restarted:
+              _state: confirm_restart
+
+blocks:
+  - id: content_card
+    type: Card
+    layout:
+      size: 800
+      contentGutter: 16
+    blocks:
+      - id: page_heading
+        type: Title
+        properties:
+          content: Log a ticket
+          level: 3
+      - id: ticket_title
+        type: TextInput
+        required: true
+        properties:
+          title: Title
+      - id: ticket_type
+        type: ButtonSelector
+        required: true
+        properties:
+          title: Ticket Type
+          options:
+            - Feature Request
+            - Bug Report
+            - Question
+      - id: ticket_description
+        type: TextArea
+        properties:
+          title: Description
+      - id: confirm_restart
+        type: ButtonSelector
+        visible:
+          _eq:
+            - _state: ticket_type
+            - Bug Report
+        validate: 
+          - status: warning
+            message: If you did not restart your device, we will ask you to restart it.
+            pass:
+              _eq:
+                - _state: confirm_restart
+                - Yes
+        properties:
+          title: Did you restart your device?
+          label:
+            colon: false
+          options:
+            - Yes
+            -  No
+      - id: reset_button
+        type: Button
+        layout:
+          span: 12
+        properties:
+          title: Reset
+          block: true
+          type: default
+          icon: ClearOutlined
+        events:
+          onClick:
+            - id: reset
+              type: Reset
+      - id: submit_button
+        type: Button
+        layout:
+          span: 12
+        properties:
+          title: Submit
+          block: true
+          type: primary
+          icon: SaveOutlined
+        events:
+          onClick:
+            - id: validate
+              type: Validate
+            - id: post_data
+              type: Request
+              params: post_data
+            - id: reset
+              type: Reset
